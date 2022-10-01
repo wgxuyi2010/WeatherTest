@@ -3,6 +3,7 @@ package com.xy.wathertest.ui.weather
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -21,6 +22,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class WeatherActivity : AppCompatActivity() {
+    companion object {
+        private const val TAG = "WeatherActivity"
+    }
+
     val viewModel by lazy { ViewModelProvider(this).get(WeatherViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +53,7 @@ class WeatherActivity : AppCompatActivity() {
             if (weather != null) {
                 showWeatherInfo(weather)
             } else {
+                Log.d(TAG, "weather is null")
                 Toast.makeText(this, "无法成功获取天气信息", Toast.LENGTH_SHORT).show()
             }
         })
@@ -77,7 +83,9 @@ class WeatherActivity : AppCompatActivity() {
             val skyInfo = view.findViewById(R.id.skyInfo) as TextView
             val temperatureInfo = view.findViewById(R.id.temperatureInfo) as TextView
             val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            dateInfo.text = simpleDateFormat.format(skycon.date)
+            Log.d("WeatherActivity", "skycon.date = ${skycon.date}")
+            //dateInfo.text = simpleDateFormat.format(skycon.date)
+            dateInfo.text = skycon.date.substring(0, 10)
             val sky = getSky(skycon.value)
             skyIcon.setImageResource(sky.icon)
             skyInfo.text = sky.info

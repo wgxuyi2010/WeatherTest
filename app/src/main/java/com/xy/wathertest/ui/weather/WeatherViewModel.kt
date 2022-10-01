@@ -1,5 +1,6 @@
 package com.xy.wathertest.ui.weather
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
@@ -16,6 +17,7 @@ class WeatherViewModel: ViewModel() {
     var placeName = ""
 
     val weatherLiveData = Transformations.switchMap(locationLiveData) { location ->
+        Log.d("WeatherViewModel", "lng = ${location.lng} lat = ${location.lat}")
         Repository.refreshWeather(location.lng, location.lat)
     }
 
