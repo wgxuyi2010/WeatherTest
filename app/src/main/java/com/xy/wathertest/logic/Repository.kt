@@ -1,6 +1,7 @@
 package com.xy.wathertest.logic
 
 import androidx.lifecycle.liveData
+import com.xy.wathertest.logic.dao.PlaceDao
 import com.xy.wathertest.logic.model.Place
 import com.xy.wathertest.logic.model.Weather
 import com.xy.wathertest.logic.network.WeatherNetwork
@@ -56,4 +57,10 @@ object Repository {
             }
             emit(result)
         }
+
+    fun savePlace(place: Place) = PlaceDao.savePlace(place)
+
+    fun getSavedPlace() = PlaceDao.getSavedPlace()
+
+    fun isPlaceSaved() = PlaceDao.isPlaceSaved()
 }
