@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.xy.wathertest.MainActivity
 import com.xy.wathertest.R
 import com.xy.wathertest.ui.weather.WeatherActivity
 import kotlinx.android.synthetic.main.fragment_place.*
@@ -31,7 +32,7 @@ class PlaceFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        if (viewModule.isPlaceSaved()) {
+        if (activity is MainActivity && viewModule.isPlaceSaved()) {
             val place = viewModule.getSavedPlace()
             val intent = Intent(context, WeatherActivity::class.java).apply {
                 putExtra("location_lng", place.location.lng)
